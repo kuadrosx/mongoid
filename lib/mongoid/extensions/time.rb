@@ -69,7 +69,7 @@ module Mongoid
           begin
             time = object.__mongoize_time__
             if object.respond_to?(:sec_fraction)
-              ::Time.at(time.to_i, object.sec_fraction * 10**6).utc
+              ::Time.local(time.year, time.month, time.day, time.hour, time.min, time.sec, time.sec_fraction * 10**6).utc.day
             elsif time.respond_to?(:subsec)
               ::Time.at(time.to_i, time.subsec * 10**6).utc
             else
